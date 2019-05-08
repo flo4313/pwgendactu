@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>GendActu</title>
+  <link rel="icon" href="images/gendy.jpg" />
+  {{ style('css/style') }}
+</head>
+<body>
+  <section>
+    <div class="form">
+      <div id="pres">
+        <h3 id="welcome">Bienvenue sur GendActu</h3>
+        <h4 id="subtitle">Veuillez vous connecter</h4>
+      </div>
+      <a href="actu">Accueil</a>
+      <form method="POST" action="" id="formCo">
+        <div id="identifiant">
+          <label for="userId">Identifiant:</label>
+        <input type="text"  name="userId" id="userId" />
+        </div>
+        <div id="password">
+          <label>Mot de passe:</label>
+          <input type="password" name="pwd" id="pwd" />
+        </div>
+        <div id="submit">
+          <input type="submit" value="Se connecter" name="sb" id="sb" />
+        </div>
+      </form>
+    </div>
+  </section>
+</body>
+</html>

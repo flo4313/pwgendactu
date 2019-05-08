@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300');
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 536px;
+  margin: auto;
+  position: relative;
+}
+
+
+
+.subtitle {
+  margin-top: 25px;
+  color: #BDB3CB;
+  font-size: 17px;
+  text-align: center;
+  letter-spacing: 0.5;
+  opacity: 0;
+  animation: slideUp 1s cubic-bezier(0.19, 1, 0.30, 1) 0.5s forwards;
+}
+
+
+a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+p {
+  margin: 0.83rem 0;
+}
+
+#formCo>div, #pres{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.form>div, .form>form{
+  height: 50%;
+}
+
+#password, #identifiant{
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+#sb{
+  margin-top: 30px;
+}
+
+.form{
+  background-color: #BDB3CB55;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 5px;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.2%;
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
