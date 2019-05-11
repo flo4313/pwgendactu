@@ -1,0 +1,45 @@
+@layout('layouts.main')
+
+@section('title')
+  GendActu
+@endsection
+
+@section('extrascript')
+  <link href="css/jqvmap.css" media="screen" rel="stylesheet" type="text/css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+  <script src="js/jquery.vmap.js" type="text/javascript"></script>
+  <script src="js/jquery.vmap.france.js" type="text/javascript"></script>
+  <script src="js/jquery.vmap.colorsFrance.js" type="text/javascript"></script>
+  <script src="js/map.js" type="text/javascript"></script>
+@endsection
+
+@section('content')
+  <div class="accueil">
+    <h3 id="welcome">Bienvenue sur GendActu</h3>
+    <div id="searchbar">
+      <input type="text" placeholder="Recherche">
+      <div>
+        <label for="department">Department:</label>
+        <select id="department">
+          <option value="">--Departement--</option>
+          @each(dept in departments)
+        <option value="{{dept.departmentId}}">{{dept.departmentName}}</option>
+          @endeach
+        </select>
+      </div>
+      <input type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+    </div>
+    <div id="francemap"></div>
+  </div>
+  @each(topic in topics)
+    <div class="topic">
+    <a href="/topic/{{topic.topicId}}">
+    <h3>{{topic.title}}</h3>
+    @if(topic.image)
+      <img src="topic.image" alt="Image en lien avec le post">
+    @endif
+    </a>
+    <p>{{topic.description}}</p>
+    </div>
+  @endeach
+@endsection

@@ -1,0 +1,21 @@
+@layout('layouts.main')
+
+@section('title')
+  Topic{{topic.topicId}}
+@endsection
+
+@section('extrascript')
+@endsection
+
+@section('content')
+    <div class="topic">
+      <h3>{{topic.title}}</h3>
+      <div class="infosProprio">
+        <p></p>
+      </div>
+      @if(topic.image)
+        <img src="topic.image" alt="Image en lien avec le post">
+      @endif
+      <p>{{topic.description}}</p>
+    </div>
+@endsection

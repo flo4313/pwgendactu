@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>
+      @!section('title')
+  </title>
+  <link rel="icon" href="images/gendy.jpg" />
+  {{ style('css/style') }}
+  @!section('extrascript')
+</head>
+<body>
+    <header>
+        @!section('header')
+    </header>
+
+    <div class="container">
+        @!section('content')
+    </div>
+
+    <footer>
+        @!section('footer')
+    </footer>
+
+</body>
+</html>
