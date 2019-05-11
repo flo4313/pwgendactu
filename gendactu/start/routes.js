@@ -16,5 +16,10 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.on('/').render('connexion')
-Route.on('actu').render('accueil')
+Route.on('/').render('index');
+Route.get('actu','TopicController.home');
+Route.on('actu').render('layouts.accueil');
+Route.on('/index').render('auth.login');
+Route.post('/index','UserController.login').validator('ConnectUser');
+
+Route.get('/topic/:id','TopicController.show')
