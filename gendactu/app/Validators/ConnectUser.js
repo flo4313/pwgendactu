@@ -4,7 +4,7 @@ class ConnectUser {
   get rules () {
     return {
       'userId': 'required',
-      'password': 'required'
+      'pwd': 'required'
     }
   }
 
