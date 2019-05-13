@@ -1,0 +1,77 @@
+@layout('layouts.main')
+@section('title')
+    Edition actualité
+@endsection
+
+@section('header')
+  <a href="/actu">Accueil</a>
+  <h3>Edition d'une actualité</h3>
+  <a href="/topics/gestion">Gestion</a>
+@endsection
+
+@section('content')
+    <div class="form">
+        @if(flashMessage('message'))
+            <span>
+                {{flashMessage('message')}}
+            </span>
+            @endif
+        @if(flashMessage('loginError'))
+            <span>{{ flashMessage('loginError') }}</span>
+        @endif
+    <form method="POST" action="{{ route('TopicController.update') }}?_method=PUT" id="topicCreate" enctype="multipart/form-data">
+        {{ csrfField() }}
+        <div id="title">
+            <label for="title">Titre:</label>
+            <input type="text"  name="title" id="title" value="{{topic.title}}" />
+            @if(hasErrorFor('title'))
+            <span>
+                {{getErrorFor('title')}}
+            </span>
+            @endif
+        </div>
+        <div id="description">
+            <label for="description">Description:</label>
+            <textarea name="description" id="description" >{{topic.description}}</textarea>
+            @if(hasErrorFor('description'))
+            <span>
+                {{getErrorFor('description')}}
+            </span>
+            @endif
+            <div id="image">
+                <label for="image">Image:</label>
+            <input type="file" accept="image/*" name="image" id="image" value="{{topic.image}}" />
+            @if(topic.image)
+                <a href="/topic/delete/image/{{topic.topicId}}">Supprimer</a>
+                <img src="{{topic.image}}" alt="Image actuel de l'actualité">
+            @endif
+                @if(hasErrorFor('image'))
+                    <span>
+                        {{getErrorFor('image')}}
+                    </span>
+                @endif
+            </div>        
+            <div id="theme">
+                @if(flashMessage('errorM'))
+                    <span>
+                        {{flashMessage('errorM')}}
+                    </span>
+                @endif
+                <label for="theme">Theme:</label>
+                <select name="theme" id="theme">
+                    @each(theme in themes)
+                        @if(theme.themeId == topic.theme)
+                            <option value="{{theme.themeId}}" selected>{{theme.description}}</option>  
+                        @else
+                            <option value="{{theme.themeId}}" >{{theme.description}}</option>  
+                        @endif
+                    @endeach
+                </select>
+            </div>
+        </div>
+        <div id="submit">
+            <button id="sb" type="submit">Modifier</button>
+        </div>
+        </form>
+    </div>
+@endsection

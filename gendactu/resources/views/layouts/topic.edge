@@ -4,17 +4,24 @@
   Topic{{topic.topicId}}
 @endsection
 
-@section('extrascript')
+
+@section('header')
+  <a href="/actu">Accueil</a>
+  <h3>Details de l'actualité</h3>
+  <a href="/topics/gestion">Gestion</a>
 @endsection
 
-@section('content')
+@section('content') 
     <div class="topic">
+    <h1>{{theme.description}}</h1>
       <h3>{{topic.title}}</h3>
       <div class="infosProprio">
-        <p></p>
+      <p>{{gendarmerie.gendarmerieName}}</p>
+      <p>{{gendarmerie.street}}</p>
+      <p>{{gendarmerie.city}} {{gendarmerie.postalCode}}</p>
       </div>
       @if(topic.image)
-        <img src="topic.image" alt="Image en lien avec le post">
+        <img src="{{topic.image}}" alt="Image en lien avec le post">
       @endif
       <p>{{topic.description}}</p>
     </div>

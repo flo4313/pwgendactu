@@ -2,12 +2,14 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
+  <meta name="csrf_token" content="{{ csrfToken }}">
+  <link rel="icon" href="/images/gendy.jpg" />
   <title>
       @!section('title')
   </title>
-  <link rel="icon" href="images/gendy.jpg" />
   {{ style('css/style') }}
   @!section('extrascript')
+  @!section('extracss')
 </head>
 <body>
     <header>

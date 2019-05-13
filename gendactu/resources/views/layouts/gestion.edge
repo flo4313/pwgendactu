@@ -1,0 +1,28 @@
+@layout('layouts.main')
+
+@section('title')
+  Gestions topics
+@endsection
+
+@section('header')
+  <a href="/actu">Accueil</a>
+  <h3 id="welcome">Gestion des actualités</h3>
+  <a href="/topics/gestion">Gestion</a>
+@endsection
+
+@section('content')
+    <h3>{{gendarmerie.gendarmerieName}}</h3>
+    <a href="/topics/create"> Créer un nouveau topic</a>
+    <div class="topicsliste">
+    @each(topic in topics)
+        <div class="topic">
+            <a href="/topics/edit/{{topic.topicId}}">
+                <p>{{topic.topicId}}{{topic.title}}</p>
+                <p>Editer</p>
+            </a>
+            <a data-method="delete" data-confirm="Are you sure?" href="/topics/delete/{{topic.topicId}}" >
+                Supprimer
+            </a>
+        </div>
+    @endeach
+@endsection

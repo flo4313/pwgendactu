@@ -1,0 +1,70 @@
+@layout('layouts.main')
+@section('title')
+    Création actualité
+@endsection
+
+@section('header')
+  <a href="/actu">Accueil</a>
+  <h3>Création d'une actualité</h3>
+  <a href="/topics/gestion">Gestion</a>
+@endsection
+
+@section('content')
+    <div class="form">
+        @if(flashMessage('message'))
+            <span>
+                {{flashMessage('message')}}
+            </span>
+            @endif
+        @if(flashMessage('loginError'))
+            <span>{{ flashMessage('loginError') }}</span>
+        @endif
+    <form method="POST" action="{{ route('TopicController.create') }}" id="topicCreate" enctype="multipart/form-data">
+        {{ csrfField() }}
+        <div id="title">
+            <label for="title">Titre:</label>
+            <input type="text"  name="title" id="title" value="{{old('title','')}}" />
+            @if(hasErrorFor('title'))
+            <span>
+                {{getErrorFor('title')}}
+            </span>
+            @endif
+        </div>
+        <div id="description">
+            <label for="description">Description:</label>
+            <textarea name="description" id="description" >{{old('description','')}}</textarea>
+            @if(hasErrorFor('description'))
+            <span>
+                {{getErrorFor('description')}}
+            </span>
+            @endif
+            <div id="image">
+                <label for="image">Image:</label>
+                <input type="file" accept="image/*" name="image" id="image" value="{{old('image','')}}" />
+                @if(hasErrorFor('image'))
+                    <span>
+                        {{getErrorFor('image')}}
+                    </span>
+                @endif
+            </div>        
+            <div id="theme">
+                @if(flashMessage('errorM'))
+                    <span>
+                        {{flashMessage('errorM')}}
+                    </span>
+                @endif
+                <label for="theme">Theme:</label>
+                <select name="theme" id="theme">
+                    <option value="">--Themes--</option>
+                    @each(theme in themes)
+                        <option value="{{theme.themeId}}">{{theme.description}}</option>  
+                    @endeach
+                </select>
+            </div>
+        </div>
+        <div id="submit">
+            <button id="sb" type="submit">Créer</button>
+        </div>
+        </form>
+    </div>
+@endsection

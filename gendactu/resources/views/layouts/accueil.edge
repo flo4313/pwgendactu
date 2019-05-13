@@ -13,9 +13,14 @@
   <script src="js/map.js" type="text/javascript"></script>
 @endsection
 
+@section('header')
+  <a href="/actu">Accueil</a>
+  <h3 id="welcome">Bienvenue sur GendActu</h3>
+  <a href="/topics/gestion">Gestion</a>
+@endsection
+
 @section('content')
   <div class="accueil">
-    <h3 id="welcome">Bienvenue sur GendActu</h3>
     <div id="searchbar">
       <input type="text" placeholder="Recherche">
       <div>
@@ -23,20 +28,29 @@
         <select id="department">
           <option value="">--Departement--</option>
           @each(dept in departments)
-        <option value="{{dept.departmentId}}">{{dept.departmentName}}</option>
+            <option value="{{dept.departmentId}}">{{dept.departmentName}}</option>  
           @endeach
         </select>
       </div>
+      <div>
+          <label for="theme">Theme:</label>
+          <select id="themes">
+            <option value="">--Themes--</option>
+            @each(theme in themes)
+              <option value="{{theme.themeId}}">{{theme.description}}</option>  
+            @endeach
+          </select>
+        </div>
       <input type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
     </div>
     <div id="francemap"></div>
   </div>
   @each(topic in topics)
     <div class="topic">
-    <a href="/topic/{{topic.topicId}}">
+    <a href="/topics/{{topic.topicId}}">
     <h3>{{topic.title}}</h3>
     @if(topic.image)
-      <img src="topic.image" alt="Image en lien avec le post">
+      <img src="{{topic.image}}" alt="Image en lien avec le post">
     @endif
     </a>
     <p>{{topic.description}}</p>
