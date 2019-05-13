@@ -1,0 +1,44 @@
+#searchbar{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#francemap{
+    background-color: #FFFFFF00 !important; 
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 20px;
+    background-color: #428bca;
+    color: white;
+    padding: 10px;
+}
+
+footer>div>a{
+    color: white;
+}
+
+body{
+    margin-top: 75px; 
+}
+
+.topic{
+    text-align: center;
+    padding: 5px;
+    border: white solid 1px;
+    background-color: #FFFFFF88;
+    border-radius: 20px;
+    margin-bottom: 15px;
+}
+
+.topicImg{
+    max-height: 200px;
+    margin-bottom: 20px;
+}

@@ -19,7 +19,7 @@
         @if(flashMessage('loginError'))
             <span>{{ flashMessage('loginError') }}</span>
         @endif
-    <form method="POST" action="{{ route('TopicController.update') }}?_method=PUT" id="topicCreate" enctype="multipart/form-data">
+    <form method="POST" action="/topic/edit/{{topic.topicId}}/?_method=PUT" id="topicCreate" enctype="multipart/form-data">
         {{ csrfField() }}
         <div id="title">
             <label for="title">Titre:</label>

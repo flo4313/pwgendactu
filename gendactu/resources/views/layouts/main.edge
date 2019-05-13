@@ -8,11 +8,14 @@
       @!section('title')
   </title>
   {{ style('css/style') }}
+  {{ style('css/font-awesome') }}
+  {{ style('css/bootstrap/bootstrap.min') }}
+  {{ script('js/bootstrap/bootstrap.min') }}
   @!section('extrascript')
   @!section('extracss')
 </head>
 <body>
-    <header>
+    <header id="header">
         @!section('header')
     </header>
 
@@ -20,7 +23,7 @@
         @!section('content')
     </div>
 
-    <footer>
+    <footer id="footer">
         @!section('footer')
     </footer>
 

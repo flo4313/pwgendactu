@@ -37,7 +37,6 @@ class TopicController {
     async update({response,request,session,params}){
         const id = params.id;
         const topic = await Topic.query().where('topicId',id).first();
-
         topic.title = request.input('title');
         topic.description = request.input('description');
         const file = request.file('image',{
@@ -67,6 +66,7 @@ class TopicController {
                 topic.save();
                 session.flash({message:"Actualité modifiée"});
                 response.redirect('back');
+                topic.save();
             } catch (error) {
                 session.flash({message:"Echec de la modification"});
                 response.redirect('back');

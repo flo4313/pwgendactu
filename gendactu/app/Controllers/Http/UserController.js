@@ -12,15 +12,17 @@ class UserController {
             let usertmp = await User.query().select('email').where('nigend',userID).first();
             userID = usertmp.email;
         }
-        console.log(userID);
         try {
             if(await auth.attempt(userID,password)){
                 let user = await User.findBy('email',userID);
                 if (user == null){
                     user = await User.findBy('nigend',userId);
                 }
-                let token = await auth.generate(user);
-                response.cookie('Authorization',token,{ httpOnly: true, path: '/' });
+                //let token = await auth.generate(user);
+                //response.cookie('Authorization',token,{ httpOnly: true, path: '/' });
+                let cp = user.postalCode;
+                let dep = parseInt(cp.toString().substr(0,2),10);
+                response.cookie('Department',dep);
                 return response.redirect('actu');
             }
             else{

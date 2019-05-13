@@ -5,38 +5,42 @@
 
 
 @section('content')
-    <div class="form">
-        <div id="pres">
-          <h3 id="welcome">Bienvenue sur GendActu</h3>
-          <h4 id="subtitle">Veuillez vous connecter</h4>
-        </div>
-        <a href="actu">Accueil</a>
-        @if(flashMessage('loginError'))
-            <span>{{ flashMessage('loginError') }}</span>
-        @endif
-    <form method="POST" action="{{ route('UserController.login') }}" id="formCo">
-        {{ csrfField() }}
-        <div id="identifiant">
-            <label for="userId">Identifiant:</label>
-            <input type="text"  name="userId" id="userId" value="{{old('userId','')}}" />
-            @if(hasErrorFor('userId'))
-            <span>
-                {{getErrorFor('userId')}}
-            </span>
+<div class="container-fluid" id="formIndex">
+    <div class="row justify-content-center align-self-center">
+        <div class="form justify-content-center align-self-center">
+            <div id="pres" class="form-group form-control-sm">
+            <h3 id="welcome">Bienvenue sur GendActu</h3>
+            <img src="images/logo.png" alt="logo du portail de connexion" id="logo">
+            <h4 id="subtitle">Veuillez vous connecter</h4>
+            </div>
+            @if(flashMessage('loginError'))
+                <span>{{ flashMessage('loginError') }}</span>
             @endif
+        <form method="POST" action="{{ route('UserController.login') }}" id="formCo">
+            {{ csrfField() }}
+            <div id="identifiant">
+                <label for="userId">Identifiant:</label>
+                <input class="input-sm" type="text"  name="userId" id="userId" value="{{old('userId','')}}" />
+                @if(hasErrorFor('userId'))
+                <span>
+                    {{getErrorFor('userId')}}
+                </span>
+                @endif
+            </div>
+            <div id="password">
+                <label for="pwd">Mot de passe:</label>
+                <input type="password" class="input-sm" name="pwd" id="pwd" />
+                @if(hasErrorFor('pwd'))
+                <span>
+                    {{getErrorFor('pwd')}}
+                </span>
+                @endif
+            </div>
+            <div id="submit">
+                <button id="sb" type="submit" class="bt_sbt">Se connecter</button>
+            </div>
+            </form>
         </div>
-        <div id="password">
-            <label for="pwd">Mot de passe:</label>
-            <input type="password" name="pwd" id="pwd" />
-            @if(hasErrorFor('pwd'))
-            <span>
-                {{getErrorFor('pwd')}}
-            </span>
-            @endif
-        </div>
-        <div id="submit">
-            <button id="sb" type="submit">Se connecter</button>
-        </div>
-        </form>
     </div>
+</div>
 @endsection

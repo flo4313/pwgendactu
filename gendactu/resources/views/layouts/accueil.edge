@@ -5,24 +5,32 @@
 @endsection
 
 @section('extrascript')
-  <link href="css/jqvmap.css" media="screen" rel="stylesheet" type="text/css" />
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
-  <script src="js/jquery.vmap.js" type="text/javascript"></script>
-  <script src="js/jquery.vmap.france.js" type="text/javascript"></script>
-  <script src="js/jquery.vmap.colorsFrance.js" type="text/javascript"></script>
-  <script src="js/map.js" type="text/javascript"></script>
+  {{style('css/accueil')}}
+  {{style('css/jqvmap')}}
+  {{script('js/jquery.vmap')}}
+  {{script('js/jquery.vmap.france')}}
+  {{script('js/jquery.vmap.colorsFrance')}}
+  {{script('js/map')}}
 @endsection
 
 @section('header')
-  <a href="/actu">Accueil</a>
-  <h3 id="welcome">Bienvenue sur GendActu</h3>
-  <a href="/topics/gestion">Gestion</a>
+  <div class="headertitle">
+    <h3 id="welcome">Bienvenue sur GendActu</h3>
+  </div>
+  <div class="headermenu">
+    <div>
+      <a href="/actu"><i class="fa fa-home" aria-hidden="true"></i> Accueil </a>
+    </div>
+    <div>
+      <a href="/topics/gestion"><i class="fa fa-cog" aria-hidden="true"> </i> Gestion </a>
+    </div>
+  </div>
 @endsection
 
 @section('content')
-  <div class="accueil">
+  <div class="container">
     <div id="searchbar">
-      <input type="text" placeholder="Recherche">
       <div>
         <label for="department">Department:</label>
         <select id="department">
@@ -41,7 +49,7 @@
             @endeach
           </select>
         </div>
-      <input type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+      <button type="submit" class="bt_sbt">Rechercher<i class="fa fa-search" aria-hidden="true"></i></button>
     </div>
     <div id="francemap"></div>
   </div>
@@ -50,10 +58,18 @@
     <a href="/topics/{{topic.topicId}}">
     <h3>{{topic.title}}</h3>
     @if(topic.image)
-      <img src="{{topic.image}}" alt="Image en lien avec le post">
+      <img class="topicImg" src="{{topic.image}}" alt="Image en lien avec le post">
     @endif
     </a>
     <p>{{topic.description}}</p>
     </div>
   @endeach
+@endsection
+
+@section('footer')
+    <p>Site réalisé par Florian Smague</p>
+    <div>
+      <a href="mailto:fsmague@gmail.com"> Contactez-moi:</a>
+      <p>fsmague@gmail.com</p>
+    </div>
 @endsection
