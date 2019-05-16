@@ -13,7 +13,6 @@ class GendarmerieSchema extends Schema {
       table.string('city', 80).notNullable()
       table.integer('postalCode').notNullable()
       table.integer('phoneNumber').notNullable()
-      table.string('chef').references('nigend').inTable('users').notNullable()
       table.integer('department').references('departmentId').inTable('departments').notNullable()
     })
   }
