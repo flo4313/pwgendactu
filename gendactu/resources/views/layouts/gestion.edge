@@ -4,25 +4,57 @@
   Gestions topics
 @endsection
 
+@section('extracss')
+    {{style('css/gestion')}}
+@endsection
+
+@section('extrascript')
+  {{script('js/gestion')}}
+@endsection
+
 @section('header')
-  <a href="/actu">Accueil</a>
-  <h3 id="welcome">Gestion des actualités</h3>
-  <a href="/topics/gestion">Gestion</a>
+    <div class="headertitle">
+        <h3 id="welcome">Gestion des actualités</h3>
+      </div>
+      <div class="headermenu">
+        <div>
+          <a href="/actu"><i class="fa fa-home" aria-hidden="true"></i> Accueil </a>
+        </div>
+        <div>
+          <a href="/topics/gestion"><i class="fa fa-cog" aria-hidden="true"> </i> Gestion </a>
+        </div>
+      </div>
 @endsection
 
 @section('content')
-    <h3>{{gendarmerie.gendarmerieName}}</h3>
-    <a href="/topics/create"> Créer un nouveau topic</a>
-    <div class="topicsliste">
-    @each(topic in topics)
-        <div class="topic">
-            <a href="/topics/edit/{{topic.topicId}}">
-                <p>{{topic.topicId}}{{topic.title}}</p>
-                <p>Editer</p>
-            </a>
-            <a data-method="delete" data-confirm="Are you sure?" href="/topics/delete/{{topic.topicId}}" >
-                Supprimer
-            </a>
-        </div>
-    @endeach
+    <div id="gendarmerie"></div>
+    <a href="/gestion/topic/create"> Créer un nouveau topic</a>
+    <div id="topicsliste">
+    </div>
+    <script>
+    function deleteTopic(id){
+                var resultat = "";
+                var xhr = new XMLHttpRequest();
+                xhr.open('DELETE', '/gesion/topic/delete/'+id,true); 
+                xhr.withCredentials = true;
+                xhr.setRequestHeader("x-csrf-token", '{{ csrfToken }}');
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        let value = JSON.parse(xhr.responseText);
+                        resultat = value.valeur;
+                        alert("Topic supprimé!");
+                        if(resultat=="remove"){
+                            var elem = document.getElementById(id);
+                            elem.parentNode.removeChild(elem);
+                        }
+                    }
+                    else {
+                        alert('Echec lors de la suppresion. Status ' + xhr.status);
+                    }
+                };
+                xhr.send(); 
+            }
+    </script>
 @endsection
+

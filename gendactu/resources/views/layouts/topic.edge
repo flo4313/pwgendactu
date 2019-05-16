@@ -1,28 +1,58 @@
 @layout('layouts.main')
 
+@section('extracss')
+  {{style('css/topic')}}
+@endsection
+
 @section('title')
-  Topic{{topic.topicId}}
+  Topic {{topic.topicId}}
 @endsection
 
 
 @section('header')
-  <a href="/actu">Accueil</a>
-  <h3>Details de l'actualité</h3>
-  <a href="/topics/gestion">Gestion</a>
+<div class="headertitle">
+  <h3 id="welcome">Détails de l'actualité</h3>
+</div>
+<div class="headermenu">
+  <div>
+    <a href="/actu"><i class="fa fa-home" aria-hidden="true"></i> Accueil </a>
+  </div>
+  <div>
+    <a href="/topics/gestion"><i class="fa fa-cog" aria-hidden="true"> </i> Gestion </a>
+  </div>
+</div>
 @endsection
 
 @section('content') 
     <div class="topic">
-    <h1>{{theme.description}}</h1>
-      <h3>{{topic.title}}</h3>
-      <div class="infosProprio">
-      <p>{{gendarmerie.gendarmerieName}}</p>
-      <p>{{gendarmerie.street}}</p>
-      <p>{{gendarmerie.city}} {{gendarmerie.postalCode}}</p>
+      <div class="infosTopic">
+        <div class="theme">
+          <h1>Theme de l'actualité:</h1>
+          <h1>{{theme.description}}</h1>
+        </div>
+        <div class="titre">
+          <h3>Intitulé:</h3>
+          <h3>{{topic.title}}</h3>
+          @if(topic.image)
+            <img src="{{topic.image}}" alt="Image en lien avec le post">
+          @endif
+          <p>{{topic.description}}</p>
+        </div>
       </div>
-      @if(topic.image)
-        <img src="{{topic.image}}" alt="Image en lien avec le post">
-      @endif
-      <p>{{topic.description}}</p>
+
+      <div class="infosProprio">
+          <p>{{gendarmerie.gendarmerieName}}</p>
+          <p>{{gendarmerie.street}}</p>
+          <p>{{gendarmerie.city}} {{gendarmerie.postalCode}}</p>
+        </div>
     </div>
 @endsection
+
+@section('footer')
+    <p>Site réalisé par Florian Smague</p>
+    <div>
+      <a href="mailto:fsmague@gmail.com"> Contactez-moi:</a>
+      <p>fsmague@gmail.com</p>
+    </div>
+@endsection
+

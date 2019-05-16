@@ -1,0 +1,45 @@
+body{
+    margin-top: 75px; 
+}
+
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 20px;
+    background-color: #428bca;
+    color: white;
+    padding: 10px;
+}
+
+footer>div>a{
+    color: white;
+}
+
+.topic{
+    width: 100%;
+    margin-top: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px;
+    background-color: #FFFFFF88;
+}
+
+.topic>div{
+    width: 50%;
+}
+
+
+.infosProprio, .infosTopic{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

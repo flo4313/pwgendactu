@@ -10,13 +10,7 @@ $(document).ready(function() {
     selectedColor: "#EC0000",
       onRegionClick: function(element, code, region)
       {
-          var message = 'Département : "'
-              + region 
-              + '" || Code : "'
-              + code
-        + '"';
-           
-          alert(message);
+        getTopics(code);
       }
   })
 });
