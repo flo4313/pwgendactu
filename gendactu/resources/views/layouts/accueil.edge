@@ -11,10 +11,9 @@
 
 @section('extrascript')
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
-  {{script('js/jquery.vmap')}}
-  {{script('js/jquery.vmap.france')}}
-  {{script('js/jquery.vmap.colorsFrance')}}
-  {{script('js/map')}}
+  <script src="js/jquery.vmap.js" type="text/javascript"></script>
+  <script src="js/jquery.vmap.france.js" type="text/javascript"></script>
+	<script src="js/jquery.vmap.colorsFrance.js" type="text/javascript"></script>
   {{script('js/accueil')}}
 @endsection
 
@@ -26,9 +25,18 @@
     <div>
       <a href="/actu"><i class="fa fa-home" aria-hidden="true"></i> Accueil </a>
     </div>
-    <div>
-      <a href="/gestion/topics"><i class="fa fa-cog" aria-hidden="true"> </i> Gestion </a>
+    <div id="mright">
+    @if(admin == true)
+      <div >
+          <div id="gestion">
+            <a href="/gestion/topics" ><i class="fa fa-cog" aria-hidden="true"> </i> Gestion </a>
+          </div>
+      </div>
+      <div id="logout">
+          <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"> </i> Deconnexion </a>
+      </div>
     </div>
+    @endif    
   </div>
 @endsection
 
@@ -36,7 +44,7 @@
   <div id="searchbar">
       <div>
         <label for="department">Department:</label>
-        <select id="department">
+        <select id="departmentS">
         </select>
       </div>
       <div>
@@ -50,11 +58,10 @@
     <div id="topicsliste"></div>
     <div id="pagination"></div>
     <script>
-      function recherche(){
-          var th = document.getElementById('themes').value;
-          var dpt = document.getElementById('department').value;
-          getTopics(dpt,th);
-        }
+      getTopics();
+      getThemes();
+      getDepartment();
+      
     </script>
 @endsection
 

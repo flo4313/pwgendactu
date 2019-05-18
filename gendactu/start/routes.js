@@ -14,34 +14,36 @@
 */
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
-const Route = use('Route')
+const Route = use('Route');
 
 Route.on('/').render('index');
-Route.on('actu').render('layouts.accueil');
-Route.on('/index').render('auth.login');
-Route.post('/index','UserController.login').validator('ConnectUser');
+Route.on('/index').render('index');
+Route.post('/login','UserController.login').validator('ConnectUser');
+Route.get('/logout','UserController.logout');
 
+Route.get('/actu','DirigerController.isAdmin');
+Route.on('actu').render('layouts.accueil').middleware['auth'];
 
 Route.get('/topic/:id','TopicController.show');
 Route.get('/themes','ThemeController.alltheme');
 Route.get('/departments','DepartmentController.allDepartment');
 
 Route.group(() =>{
-    // add param gendarmerie
-    Route.get('nbPages/:id','TopicController.getNbPages');
-    Route.get(':department/:page','TopicController.byDep');
+    Route.get('nbPages/department/:id','TopicController.getNbPagesDepartment');
+    Route.get('nbPages/theme/:theme/department/:department','TopicController.getNbPagesTheme');
+    Route.get('/department/:department/page/:page','TopicController.byDep');
+    Route.get('department/:department/theme/:theme/page/:page','TopicController.byDepTheme');
 }).prefix('topics');
-
 
 Route.group(()=>{
     Route.get('/topic/create','ThemeController.all');
-    Route.get('/topic/edit/:id','TopicController.edit');
+    Route.get('/topic/:id/edit','TopicController.edit');
     Route.get('/','TopicController.gestion');
     Route.on('topics').render('layouts.gestion');
 
     Route.post('/topic/create','TopicController.create').validator('TopicCreate');
-    Route.put('/topic/edit/:id','TopicController.update').validator('TopicCreate');
-    Route.post('/topic/delete/image/:id','TopicController.deleteImage');
-    Route.delete('topic/delete/:id','TopicController.delete');
+    Route.put('/topic/:id/edit','TopicController.update').validator('TopicCreate');
+    Route.delete('/topic/:id/image/delete','TopicController.deleteImage');
+    Route.delete('topic/:id/delete','TopicController.delete');
 
 }).prefix('gestion');

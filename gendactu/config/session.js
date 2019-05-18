@@ -65,6 +65,7 @@ module.exports = {
   */
   cookie: {
     httpOnly: true,
+    expires: 0,
     sameSite: false,
     path: '/'
   },

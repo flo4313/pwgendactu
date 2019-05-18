@@ -9,10 +9,13 @@ class Auth {
    * @param {Request} ctx.request
    * @param {Function} next
    */
-  async handle ({ request }, next) {
-    // call next to advance the request
-    await next()
-  }
+  async handle ({request,response}, next) {
+      const token = request.cookie('Authorization');
+      if(token != null) {
+        const send_token = token['token'];
+        request.request.headers.authorization = `Bearer ${send_token}`;
+      }
+      await next()
+    }
 }
-
 module.exports = Auth

@@ -53,3 +53,9 @@ body{
 }
 
 
+#mright{
+    display: flex;
+    flex-direction: row;
+    padding: 0px 5px;
+    justify-content: space-between;
+}

@@ -1,25 +1,26 @@
     var topicsJSON;
+    var departmentJSON;
     var page = 1;
     var nbpages = 1;
     var theme = "all";
     var department = 43;
     var nbTopics = 0;
-    var themes
+    var themes;
 
     function  displayTopics(topics){
-        console.log(topics);
         document.getElementById('topicsliste').innerHTML="";
         if (topics == null){
             document.getElementById('topicsliste').innerHTML='<h3 id="topicnull">Il n\'y a aucune actualité</h3>';
         }
-        for(let topic of topics){
-            if (topic.image != null){
-                document.getElementById('topicsliste').innerHTML+='<div class="topic"><a href="/topic/'+topic.topicId+'"><h3>'+topic.title+'</h3><img class="topicImg" src="'+topic.image+'" alt="Image en lien avec le post"></a><p>'+topic.description+'</p></div>'
+        else{
+            for(let topic of topics){
+                if (topic.image != null){
+                    document.getElementById('topicsliste').innerHTML+='<div class="topic"><a href="/topic/'+topic.topicId+'"><h3>'+topic.title+'</h3><img class="topicImg" src="'+topic.image+'" alt="Image en lien avec le post"></a><p>'+topic.description+'</p></div>'
+                }
+                else{
+                    document.getElementById('topicsliste').innerHTML+='<div class="topic"><a href="/topic/'+topic.topicId+'"><h3>'+topic.title+'</h3></a><p>'+topic.description+'</p></div>'
+                }
             }
-            else{
-                document.getElementById('topicsliste').innerHTML+='<div class="topic"><a href="/topic/'+topic.topicId+'"><h3>'+topic.title+'</h3></a><p>'+topic.description+'</p></div>'
-            }
-            
         }
         getNbPages();
     }
@@ -27,10 +28,10 @@
     function  displayDepartment(listedepartments){
         for(let d of listedepartments){
             if (d.departmentId == department){
-                document.getElementById('department').innerHTML+='<option value="'+d.departmentId+'" selected>'+d.departmentName+'</option>';
+                document.getElementById('departmentS').innerHTML+='<option value="'+d.departmentId+'" selected>'+d.departmentName+'</option>';
             }
             else{
-                document.getElementById('department').innerHTML+='<option value="'+d.departmentId+'">'+d.departmentName+'</option>';
+                document.getElementById('departmentS').innerHTML+='<option value="'+d.departmentId+'">'+d.departmentName+'</option>';
             }
         }
         getNbPages();
@@ -162,9 +163,7 @@
             if (xhr.status === 200) {
                 let value = JSON.parse(xhr.responseText);
                 var listedepartments = value.departments;
-                console.log("coucou");
-                console.log(listedepartments);
-                console.log("coucou");
+                departmentJSON = listedepartments;
                 displayDepartment(listedepartments);
             }
             else {
@@ -174,18 +173,15 @@
         xhr.send();
     }
 
-    function getNbPages(themeT = null){
+    function getNbPages(){
         var resultat = "";
         var xhr = new XMLHttpRequest();
         var dep = department;
-        if(themeT === null && theme === "all"){
-            xhr.open('GET','/topics/nbPages/'+dep); 
+        if(theme === "all"){
+            xhr.open('GET','/topics/nbPages/department/'+dep); 
         }
         else{
-            if(themeT != null){
-                theme = themeT;
-            }
-            xhr.open('GET','/topics/nbPages/'+theme+'/'+dep); 
+            xhr.open('GET','/topics/nbPages/theme/'+theme+'/department/'+dep); 
         }
         xhr.setRequestHeader("x-csrf-token", '{{ csrfToken }}');
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -214,18 +210,14 @@
         else{
             department = dep;
         }
-        console.log(department);
         var xhr = new XMLHttpRequest();
-        if(themeT === null && theme === "all"){
-            xhr.open('GET','/topics/'+department+'/'+page); 
+        if(themeT === null && theme === "all" || themeT === "all"){
+            xhr.open('GET','/topics/department/'+department+'/page/'+page); 
         }
         else{
-            if (themeT != null){
-                theme = themeT;
-            }
-            xhr.open('GET','/topics/'+department+'/'+themeT+'/'+page); 
+            theme = themeT;
+            xhr.open('GET','/topics/department/'+department+'/theme/'+theme+'/page/'+page); 
         }
-        console.log(theme);
         xhr.setRequestHeader("x-csrf-token", '{{ csrfToken }}');
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xhr.onload = function() {
@@ -247,6 +239,26 @@
         xhr.send(); 
     }   
 
-    getTopics();
-    getThemes();
-    getDepartment();
+    function recherche(){
+        var th = document.getElementById('themes').value;
+        var dpt = document.getElementById('departmentS').value;
+        getTopics(dpt,th);
+    }
+
+    $(document).ready(function() {
+		$('#francemap').vectorMap({
+		    map: 'france_fr',
+        hoverOpacity: 0.5,
+        hoverColor: false,
+        backgroundColor: "#ffffff",
+        colors: couleurs,
+        borderColor: "#000000",
+        selectedColor: "#EC0000",
+          onRegionClick: function(element, code, region)
+          {
+            var dept = parseInt(code);
+              getTopics(dept);
+              $("#departmentS").val(dept);
+          }
+      });
+    });
