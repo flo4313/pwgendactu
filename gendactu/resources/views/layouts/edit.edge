@@ -4,9 +4,19 @@
 @endsection
 
 @section('header')
-  <a href="/actu">Accueil</a>
-  <h3>Edition d'une actualité</h3>
-  <a href="/topics/gestion">Gestion</a>
+<div class="headertitle">
+        <h3 id="welcome">Edition d'une actualité</h3>
+      </div>
+      <div class="headermenu">
+        <div>
+          <a href="/actu"><i class="fa fa-home" aria-hidden="true"></i> Accueil </a>
+        </div>
+        @if(flashMessage('admin')=='Is admin')
+          <div>
+              <a href="/gestion/topics"><i class="fa fa-cog" aria-hidden="true"> </i> Gestion </a>
+          </div>  
+        @endif    
+      </div>
 @endsection
 
 @section('content')
@@ -19,7 +29,7 @@
         @if(flashMessage('loginError'))
             <span>{{ flashMessage('loginError') }}</span>
         @endif
-    <form method="POST" action="/topic/edit/{{topic.topicId}}/?_method=PUT" id="topicCreate" enctype="multipart/form-data">
+    <form method="POST" action="/gestion/topic/{{topic.topicId}}/edit/?_method=PUT" id="topicCreate" enctype="multipart/form-data">
         {{ csrfField() }}
         <div id="title">
             <label for="title">Titre:</label>
@@ -41,15 +51,6 @@
             <div id="image">
                 <label for="image">Image:</label>
             <input type="file" accept="image/*" name="image" id="image" value="{{topic.image}}" />
-            @if(topic.image)
-                <a href="/topic/delete/image/{{topic.topicId}}">Supprimer</a>
-                <img src="{{topic.image}}" alt="Image actuel de l'actualité">
-            @endif
-                @if(hasErrorFor('image'))
-                    <span>
-                        {{getErrorFor('image')}}
-                    </span>
-                @endif
             </div>        
             <div id="theme">
                 @if(flashMessage('errorM'))
@@ -73,5 +74,42 @@
             <button id="sb" type="submit">Modifier</button>
         </div>
         </form>
+        <div>
+            @if(topic.image)
+                <button onclick="deleteImg()">Supprimer</button>
+                <img id="image" src="{{topic.image}}" alt="Image actuel de l'actualité">
+            @endif
+            @if(hasErrorFor('image'))
+                <span>
+                    {{getErrorFor('image')}}
+                </span>
+            @endif
+        </div>
+        
     </div>
+    <script>
+    function deleteImg(){
+        var resultat = "";
+        var xhr = new XMLHttpRequest();
+        xhr.open('DELETE', '/gestion/topic/{{topic.topicId}}/image/delete',true); 
+        xhr.withCredentials = true;
+        xhr.setRequestHeader("x-csrf-token", '{{ csrfToken }}');
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                let value = JSON.parse(xhr.responseText);
+                resultat = value.valeur;
+                alert("Image supprimée!");
+                if(resultat=="remove"){
+                    var elem = document.getElementById('image');
+                    elem.parentNode.removeChild(elem);
+                }
+            }
+            else {
+                alert('Echec lors de la suppresion. Status ' + xhr.status);
+            }
+        };
+        xhr.send(); 
+    }
+    </script>
 @endsection

@@ -4,9 +4,19 @@
 @endsection
 
 @section('header')
-  <a href="/actu">Accueil</a>
-  <h3>Création d'une actualité</h3>
-  <a href="/topics/gestion">Gestion</a>
+<div class="headertitle">
+        <h3 id="welcome">Création d'une actualité</h3>
+      </div>
+      <div class="headermenu">
+        <div>
+          <a href="/actu"><i class="fa fa-home" aria-hidden="true"></i> Accueil </a>
+        </div>
+        @if(flashMessage('admin')=='Is admin')
+          <div>
+              <a href="/gestion/topics"><i class="fa fa-cog" aria-hidden="true"> </i> Gestion </a>
+          </div>  
+        @endif    
+      </div>
 @endsection
 
 @section('content')
@@ -49,9 +59,11 @@
             </div>        
             <div id="theme">
                 @if(flashMessage('errorM'))
-                    <span>
-                        {{flashMessage('errorM')}}
-                    </span>
+                    <div>
+                        <span>
+                            {{flashMessage('errorM')}}
+                        </span>
+                    </div> 
                 @endif
                 <label for="theme">Theme:</label>
                 <select name="theme" id="theme">

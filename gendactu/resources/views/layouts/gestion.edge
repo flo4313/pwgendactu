@@ -21,7 +21,7 @@
           <a href="/actu"><i class="fa fa-home" aria-hidden="true"></i> Accueil </a>
         </div>
         <div>
-          <a href="/topics/gestion"><i class="fa fa-cog" aria-hidden="true"> </i> Gestion </a>
+          <a href="/gestion/topics"><i class="fa fa-cog" aria-hidden="true"> </i> Gestion </a>
         </div>
       </div>
 @endsection
@@ -35,7 +35,7 @@
     function deleteTopic(id){
                 var resultat = "";
                 var xhr = new XMLHttpRequest();
-                xhr.open('DELETE', '/gesion/topic/delete/'+id,true); 
+                xhr.open('DELETE', '/gestion/topic/'+id+'/delete',true); 
                 xhr.withCredentials = true;
                 xhr.setRequestHeader("x-csrf-token", '{{ csrfToken }}');
                 xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
