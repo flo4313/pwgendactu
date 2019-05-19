@@ -10,14 +10,14 @@ var gendarmerieJSON;
             function  displayTopics(topics){
                 document.getElementById('topicsliste').innerHTML="";
                 for(let topic of topics){
-                    document.getElementById('topicsliste').innerHTML+='<div class="topic" id="'+topic.topicId+'"><a href="/gestion/topic/'+topic.topicId+'/edit"><p>'+topic.topicId+' '+topic.title+'</p><p>Editer</p></a><button type="submit" onclick="deleteTopic('+topic.topicId+')">Supprimer</button></div>'
+                    document.getElementById('topicsliste').innerHTML+='<div class="topic" id="'+topic.topicId+'"><div class="infoT"><p>Topic: '+topic.title+'</p><div class="linkT"><a class="edit" href="/gestion/topic/'+topic.topicId+'/edit">Editer <i class="fa fa-edit"></i></a></div></div><button  onclick="deleteTopic('+topic.topicId+')" class="remove">Supprimer <i class="fa fa-remove"></i></button></div>'
                 }
             }
 
             function getTopics(){
                 var resultat = "";
                 var xhr = new XMLHttpRequest();
-                xhr.open('GET','/gestion/'); 
+                xhr.open('GET','/gestion'); 
                 xhr.setRequestHeader("x-csrf-token", '{{ csrfToken }}');
                 xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
                 xhr.onload = function() {

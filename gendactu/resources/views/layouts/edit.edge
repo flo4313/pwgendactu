@@ -1,56 +1,71 @@
 @layout('layouts.main')
 @section('title')
-    Edition actualité
+    Modification actualité
 @endsection
+
+@section('extracss')
+  {{style('css/edit')}}
+@endsection
+
 
 @section('header')
 <div class="headertitle">
         <h3 id="welcome">Edition d'une actualité</h3>
       </div>
       <div class="headermenu">
-        <div>
-          <a href="/actu"><i class="fa fa-home" aria-hidden="true"></i> Accueil </a>
-        </div>
-        @if(flashMessage('admin')=='Is admin')
-          <div>
-              <a href="/gestion/topics"><i class="fa fa-cog" aria-hidden="true"> </i> Gestion </a>
-          </div>  
-        @endif    
+            <div id="mleft">
+                    <a href="/actu"><i class="fa fa-home" aria-hidden="true"></i> Accueil </a>
+                  </div>
+        <div id="mright">
+                @if(admin == true)
+                  <div id="gestion">
+                      <div >
+                        <a href="/gestion/topics" ><i class="fa fa-cog" aria-hidden="true"> </i> Gestion </a>
+                      </div>
+                  </div>
+                  @endif    
+                  <div id="logout">
+                      <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"> </i> Deconnexion </a>
+                  </div>
+                </div>
       </div>
 @endsection
 
 @section('content')
-    <div class="form">
-        @if(flashMessage('message'))
-            <span>
-                {{flashMessage('message')}}
-            </span>
+    <div id="container">
+    <div id="left">
+        <div id="editForm">
+            @if(flashMessage('message'))
+                <span>
+                    {{flashMessage('message')}}
+                </span>
+                @endif
+            @if(flashMessage('loginError'))
+                <span>{{ flashMessage('loginError') }}</span>
             @endif
-        @if(flashMessage('loginError'))
-            <span>{{ flashMessage('loginError') }}</span>
-        @endif
-    <form method="POST" action="/gestion/topic/{{topic.topicId}}/edit/?_method=PUT" id="topicCreate" enctype="multipart/form-data">
-        {{ csrfField() }}
-        <div id="title">
-            <label for="title">Titre:</label>
-            <input type="text"  name="title" id="title" value="{{topic.title}}" />
-            @if(hasErrorFor('title'))
-            <span>
-                {{getErrorFor('title')}}
-            </span>
-            @endif
-        </div>
-        <div id="description">
-            <label for="description">Description:</label>
-            <textarea name="description" id="description" >{{topic.description}}</textarea>
-            @if(hasErrorFor('description'))
-            <span>
-                {{getErrorFor('description')}}
-            </span>
-            @endif
+        <form method="POST" action="/gestion/topic/{{topic.topicId}}/edit/?_method=PUT" id="topicCreate" enctype="multipart/form-data">
+            {{ csrfField() }}
+            <div id="title">
+                <label for="title">Titre:</label>
+                <input type="text"  name="title" id="title" value="{{topic.title}}" />
+                @if(hasErrorFor('title'))
+                <span>
+                    {{getErrorFor('title')}}
+                </span>
+                @endif
+            </div>
+            <div id="description">
+                <label for="description">Description:</label>
+                <textarea name="description" id="description" >{{topic.description}}</textarea>
+                @if(hasErrorFor('description'))
+                <span>
+                    {{getErrorFor('description')}}
+                </span>
+                @endif
+            </div>
             <div id="image">
                 <label for="image">Image:</label>
-            <input type="file" accept="image/*" name="image" id="image" value="{{topic.image}}" />
+                <input type="file" accept="image/*" name="image" id="image" value="{{topic.image}}" />
             </div>        
             <div id="theme">
                 @if(flashMessage('errorM'))
@@ -69,15 +84,16 @@
                     @endeach
                 </select>
             </div>
+            <div id="submit">
+                <button id="sb" type="submit">Modifier</button>
+            </div>
+            </form>
         </div>
-        <div id="submit">
-            <button id="sb" type="submit">Modifier</button>
         </div>
-        </form>
-        <div>
+        <div id="right">
             @if(topic.image)
-                <button onclick="deleteImg()">Supprimer</button>
-                <img id="image" src="{{topic.image}}" alt="Image actuel de l'actualité">
+                <button id="delete" onclick="deleteImg()">Supprimer</button>
+                <img id="imageAff" src="{{topic.image}}" alt="Image actuel de l'actualité">
             @endif
             @if(hasErrorFor('image'))
                 <span>
@@ -85,6 +101,7 @@
                 </span>
             @endif
         </div>
+    </div>
         
     </div>
     <script>
@@ -112,4 +129,12 @@
         xhr.send(); 
     }
     </script>
+@endsection
+
+@section('footer')
+    <p>Site réalisé par Florian Smague</p>
+    <div>
+      <a href="mailto:fsmague@gmail.com"> Contactez-moi:</a>
+      <p>fsmague@gmail.com</p>
+    </div>
 @endsection

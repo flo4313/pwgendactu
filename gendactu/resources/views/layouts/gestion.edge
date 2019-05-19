@@ -17,18 +17,25 @@
         <h3 id="welcome">Gestion des actualités</h3>
       </div>
       <div class="headermenu">
-        <div>
-          <a href="/actu"><i class="fa fa-home" aria-hidden="true"></i> Accueil </a>
+          <div id="mleft">
+              <a href="/actu"><i class="fa fa-home" aria-hidden="true"></i> Accueil </a>
+            </div>
+        <div id="mright">
+          <div id="logout">
+              <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"> </i> Deconnexion </a>
+          </div>
         </div>
-        <div>
-          <a href="/gestion/topics"><i class="fa fa-cog" aria-hidden="true"> </i> Gestion </a>
-        </div>
-      </div>
+      </div> 
 @endsection
 
 @section('content')
-    <div id="gendarmerie"></div>
-    <a href="/gestion/topic/create"> Créer un nouveau topic</a>
+<div id="entete">
+  <div id="gendarmerie"></div>
+  <div id="linkCreate">
+    <a  href="/gestion/topic/create"> Créer un nouveau topic <i class="fa fa-plus"></i></a>
+  </div>
+</div>
+    
     <div id="topicsliste">
     </div>
     <script>
@@ -58,3 +65,10 @@
     </script>
 @endsection
 
+@section('footer')
+    <p>Site réalisé par Florian Smague</p>
+    <div>
+      <a href="mailto:fsmague@gmail.com"> Contactez-moi:</a>
+      <p>fsmague@gmail.com</p>
+    </div>
+@endsection

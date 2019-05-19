@@ -1,11 +1,31 @@
-    var topicsJSON;
-    var departmentJSON;
-    var page = 1;
-    var nbpages = 1;
-    var theme = "all";
-    var department = 43;
-    var nbTopics = 0;
-    var themes;
+var topicsJSON;
+var departmentJSON;
+var page = 1;
+var nbpages = 1;
+var theme = "all";
+var department = 0;
+var nbTopics = 0;
+var themes;
+
+    function getDepartment(){
+        var resultat = "";
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET','/departments'); 
+        xhr.setRequestHeader("x-csrf-token", '{{ csrfToken }}');
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                let value = JSON.parse(xhr.responseText);
+                var listedepartments = value.departments;
+                departmentJSON = listedepartments;
+                displayDepartment(listedepartments);
+            }
+            else {
+                alert('Echec lors du chargement des données ' + xhr.status);
+            }
+        };
+        xhr.send();
+    }
 
     function  displayTopics(topics){
         document.getElementById('topicsliste').innerHTML="";
@@ -96,39 +116,44 @@
 
     function displayPagination(){
         document.getElementById('pagination').innerHTML="";
-        if(nbpages <= 1){
-            document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item active"><a class="page-link" >1</a></li></ul></nav>';
-        }
-        else if(nbpages == 2){
-            if(page == 1){
-                document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item disabled"><a class="page-link"  tabindex="-1">Previous</a></li><li class="page-item active"><a class="page-link" >1</a></li><li class="page-item"><a class="page-link" onclick="suiv()" >2</a></li><li class="page-item"><a class="page-link"  onclick="suiv()">Next</a></li></ul></nav>';
-            }
-            else{
-                document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item "><a class="page-link" onclick="prev()" tabindex="-1">Previous</a></li><li class="page-item "><a class="page-link" onclick="prev()">1</a></li><li class="page-item active"><a class="page-link" >2</a></li><li class="page-item disabled"><a class="page-link">Next</a></li></ul></nav>';
-            }
+        if(nbTopics == 0){
+
         }
         else{
-            if(page == 1){
-                document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item disabled"><a class="page-link"  tabindex="-1">Previous</a></li><li class="page-item active"><a class="page-link" >1</a></li><li class="page-item"><a class="page-link" onclick="suiv()">2</a></li><li class="page-item"><a class="page-link" onclick="suiv2()">3</a></li><li class="page-item"><a class="page-link" onclick="suiv()">Next</a></li></ul></nav>';
+            if(nbpages <= 1){
+                document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item active"><a class="page-link" >1</a></li></ul></nav>';
             }
-            else if(page == 2){
-                document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item "><a class="page-link" onclick="prev()" tabindex="-1">Previous</a></li><li class="page-item "><a class="page-link" onclick="prev()">1</a></li><li class="page-item active"><a class="page-link " >2</a></li><li class="page-item"><a class="page-link" onclick="suiv()">3</a></li><li class="page-item"><a class="page-link" onclick="suiv()">Next</a></li></ul></nav>';
-            }
-            else{
-                var limit = page + 1;
-                if ( limit < nbpages){
-                    pm1 = page - 1 ;
-                    pp1 = page + 1  ;
-                    document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item "><a class="page-link" onclick="prev()" tabindex="-1">Previous</a></li><li class="page-item "><a class="page-link" onclick="prev()">'+pm1+'</a></li><li class="page-item active"><a class="page-link ">'+page+'</a></li><li class="page-item"><a class="page-link" onclick="suiv()">'+pp1+'/a></li><li class="page-item"><a class="page-link" onclick="suiv()">Next</a></li></ul></nav>';
-                }
-                else if ( limit === nbpages){
-                    pm1 = page - 1 ;
-                    pm2 = page - 2  ;
-                    document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item "><a class="page-link" onclick="prev()" tabindex="-1">Previous</a></li><li class="page-item "><a class="page-link" onclick="suiv()">'+pm2+'</a></li><li class="page-item "><a class="page-link " onclick="prev()">'+pm1+'</a></li><li class="page-item active"><a class="page-link" >'+page+'/a></li><li class="page-item"><a class="page-link disabled" >Next</a></li></ul></nav>';
+            else if(nbpages == 2){
+                if(page == 1){
+                    document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item disabled"><a class="page-link"  tabindex="-1">Previous</a></li><li class="page-item active"><a class="page-link" >1</a></li><li class="page-item"><a class="page-link" onclick="suiv()" >2</a></li><li class="page-item"><a class="page-link"  onclick="suiv()">Next</a></li></ul></nav>';
                 }
                 else{
-                    page = 1;
-                    displayPagination();
+                    document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item "><a class="page-link" onclick="prev()" tabindex="-1">Previous</a></li><li class="page-item "><a class="page-link" onclick="prev()">1</a></li><li class="page-item active"><a class="page-link" >2</a></li><li class="page-item disabled"><a class="page-link">Next</a></li></ul></nav>';
+                }
+            }
+            else{
+                if(page == 1){
+                    document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item disabled"><a class="page-link"  tabindex="-1">Previous</a></li><li class="page-item active"><a class="page-link" >1</a></li><li class="page-item"><a class="page-link" onclick="suiv()">2</a></li><li class="page-item"><a class="page-link" onclick="suiv2()">3</a></li><li class="page-item"><a class="page-link" onclick="suiv()">Next</a></li></ul></nav>';
+                }
+                else if(page == 2){
+                    document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item "><a class="page-link" onclick="prev()" tabindex="-1">Previous</a></li><li class="page-item "><a class="page-link" onclick="prev()">1</a></li><li class="page-item active"><a class="page-link " >2</a></li><li class="page-item"><a class="page-link" onclick="suiv()">3</a></li><li class="page-item"><a class="page-link" onclick="suiv()">Next</a></li></ul></nav>';
+                }
+                else{
+                    var limit = page + 1;
+                    if ( limit < nbpages){
+                        pm1 = page - 1 ;
+                        pp1 = page + 1  ;
+                        document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item "><a class="page-link" onclick="prev()" tabindex="-1">Previous</a></li><li class="page-item "><a class="page-link" onclick="prev()">'+pm1+'</a></li><li class="page-item active"><a class="page-link ">'+page+'</a></li><li class="page-item"><a class="page-link" onclick="suiv()">'+pp1+'/a></li><li class="page-item"><a class="page-link" onclick="suiv()">Next</a></li></ul></nav>';
+                    }
+                    else if ( limit === nbpages){
+                        pm1 = page - 1 ;
+                        pm2 = page - 2  ;
+                        document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item "><a class="page-link" onclick="prev()" tabindex="-1">Previous</a></li><li class="page-item "><a class="page-link" onclick="suiv()">'+pm2+'</a></li><li class="page-item "><a class="page-link " onclick="prev()">'+pm1+'</a></li><li class="page-item active"><a class="page-link" >'+page+'/a></li><li class="page-item"><a class="page-link disabled" >Next</a></li></ul></nav>';
+                    }
+                    else{
+                        page = 1;
+                        displayPagination();
+                    }
                 }
             }
         }
@@ -153,18 +178,19 @@
         xhr.send();
     }
 
-    function getDepartment(){
+    
+
+    function getUserDepartment(){
         var resultat = "";
         var xhr = new XMLHttpRequest();
-        xhr.open('GET','/departments'); 
+        xhr.open('GET','/user/department'); 
         xhr.setRequestHeader("x-csrf-token", '{{ csrfToken }}');
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xhr.onload = function() {
             if (xhr.status === 200) {
                 let value = JSON.parse(xhr.responseText);
-                var listedepartments = value.departments;
-                departmentJSON = listedepartments;
-                displayDepartment(listedepartments);
+                department = value.dep;
+                return department;
             }
             else {
                 alert('Echec lors du chargement des données ' + xhr.status);
@@ -204,7 +230,7 @@
         var resultat = "";
         if(dep === null){
             if(department === null){
-                department = 43;
+                department = getUserDepartment();
             }
         }
         else{
@@ -252,6 +278,7 @@
         hoverColor: false,
         backgroundColor: "#ffffff",
         colors: couleurs,
+        showTooltip: true,
         borderColor: "#000000",
         selectedColor: "#EC0000",
           onRegionClick: function(element, code, region)

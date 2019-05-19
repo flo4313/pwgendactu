@@ -3,24 +3,36 @@
     Création actualité
 @endsection
 
+
+@section('extracss')
+  {{style('css/edit')}}
+@endsection
+
 @section('header')
 <div class="headertitle">
         <h3 id="welcome">Création d'une actualité</h3>
       </div>
       <div class="headermenu">
-        <div>
-          <a href="/actu"><i class="fa fa-home" aria-hidden="true"></i> Accueil </a>
-        </div>
-        @if(flashMessage('admin')=='Is admin')
-          <div>
-              <a href="/gestion/topics"><i class="fa fa-cog" aria-hidden="true"> </i> Gestion </a>
-          </div>  
-        @endif    
+            <div id="mleft">
+                    <a href="/actu"><i class="fa fa-home" aria-hidden="true"></i> Accueil </a>
+                  </div>
+        <div id="mright">
+                @if(admin == true)
+                  <div id="gestion">
+                      <div >
+                        <a href="/gestion/topics" ><i class="fa fa-cog" aria-hidden="true"> </i> Gestion </a>
+                      </div>
+                  </div>
+                  @endif    
+                  <div id="logout">
+                      <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"> </i> Deconnexion </a>
+                  </div>
+                </div>    
       </div>
 @endsection
 
 @section('content')
-    <div class="form">
+    <div class="createForm">
         @if(flashMessage('message'))
             <span>
                 {{flashMessage('message')}}
@@ -48,6 +60,7 @@
                 {{getErrorFor('description')}}
             </span>
             @endif
+        </div>
             <div id="image">
                 <label for="image">Image:</label>
                 <input type="file" accept="image/*" name="image" id="image" value="{{old('image','')}}" />
@@ -73,10 +86,18 @@
                     @endeach
                 </select>
             </div>
-        </div>
         <div id="submit">
             <button id="sb" type="submit">Créer</button>
         </div>
-        </form>
+    </div>
+</form>
+    </div>
+@endsection
+
+@section('footer')
+    <p>Site réalisé par Florian Smague</p>
+    <div>
+      <a href="mailto:fsmague@gmail.com"> Contactez-moi:</a>
+      <p>fsmague@gmail.com</p>
     </div>
 @endsection

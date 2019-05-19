@@ -1,0 +1,22 @@
+@layout('layouts.main')
+@section('title')
+    Error {{status}}
+@endsection
+
+@section('extracss')
+  {{style('css/error')}}
+@endsection
+
+
+@section('content')
+<div class="errorContainer">
+  <div class="erreur">
+    <img src="/images/interdit.png" id="imgMen" alt="image d'erreur"/>      
+    <h3>ERROR {{status}}</h3>
+    <h5>{{message}}</h5>
+    <div id="link">
+      <a id="homelink" href="/index">Retour au portail de connexion <i class="fa fa-home"></i></a>
+    </div>
+  </div>
+</div>
+@endsection

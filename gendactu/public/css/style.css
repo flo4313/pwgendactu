@@ -158,13 +158,13 @@ button>i{
   padding-left: 5px; 
 }
 
-.headermenu>div{
+#mleft,#mright>div{
   padding-right: 5px;
   background: white;
   border-radius: 5px;
 }
 
-.headermenu>div>a{
+.headermenu>div>a, #mright>div>a,#mright>div>div>a{
   color: black;
 }
 
@@ -187,4 +187,15 @@ i{
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+#mright{
+  display: flex;
+  flex-direction: row;
+  padding: 0px 5px;
+  justify-content: space-between;
+}
+
+#gestion{
+  margin-right: 5px;
 }

@@ -1,0 +1,111 @@
+body{
+    padding-top: 150px;
+    height: 100%; 
+}
+
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 20px;
+    background-color: #428bca;
+    color: white;
+    padding: 10px;
+}
+
+footer>div>a{
+    color: white;
+}
+
+form>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+    text-align: center;
+}
+
+textarea{
+    max-height: 100px;
+}
+
+#editForm{
+    background-color: #BDB3CB33;
+    width: 80%;
+    margin-left: 10%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 0px;
+    border-radius: 5px;
+}
+
+.createForm{
+    background-color: #BDB3CB33;
+    width: 60%;
+    margin-left: 20%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 0px;
+    border-radius: 5px;
+}
+
+#container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#image{
+    border: 0px;
+}
+
+#container>div{
+    width: 50%;
+}
+
+#right{
+    display: flex;
+    flex-direction: column;
+}
+
+#imageAff{
+    margin-top: 10px;
+    max-height: 400px;
+    margin-left: 10%;
+    max-width: 80%;
+}
+
+#delete{
+    margin-left: 30%;
+    width: 40%;
+}
+
+button{
+    height: 100%;
+    padding: 10px;
+    background: #0000FFCC;
+    color: white;
+    outline: none;
+    border: 1px solid #0000FF;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+button:hover{
+    padding: 10px;
+    background: white;
+    color:  #0000FF;
+    outline: none;
+    border: 1px solid #0000FFCC;
+    border-radius: 5px;
+}
