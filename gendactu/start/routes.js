@@ -21,29 +21,29 @@ Route.on('/index').render('index');
 Route.post('/login','UserController.login').validator('ConnectUser');
 Route.get('/logout','UserController.logout');
 
-Route.get('/actu','DirigerController.isAdmin');
+Route.get('/actu','DirigerController.isAdmin').middleware['auth'];
 Route.on('actu').render('layouts.accueil').middleware['auth'];
-
-Route.get('/topic/:id','TopicController.show');
+Route.get('/user/department','UserController.getDepartment').middleware['auth'];
+Route.get('/topic/:id','TopicController.show').middleware['auth'];
 Route.get('/themes','ThemeController.alltheme');
 Route.get('/departments','DepartmentController.allDepartment');
 
 Route.group(() =>{
-    Route.get('nbPages/department/:id','TopicController.getNbPagesDepartment');
-    Route.get('nbPages/theme/:theme/department/:department','TopicController.getNbPagesTheme');
-    Route.get('/department/:department/page/:page','TopicController.byDep');
-    Route.get('department/:department/theme/:theme/page/:page','TopicController.byDepTheme');
+    Route.get('nbPages/department/:id','TopicController.getNbPagesDepartment').middleware['auth'];
+    Route.get('nbPages/theme/:theme/department/:department','TopicController.getNbPagesTheme').middleware['auth'];
+    Route.get('/department/:department/page/:page','TopicController.byDep').middleware['auth'];
+    Route.get('department/:department/theme/:theme/page/:page','TopicController.byDepTheme').middleware['auth'];
 }).prefix('topics');
 
 Route.group(()=>{
-    Route.get('/topic/create','ThemeController.all');
-    Route.get('/topic/:id/edit','TopicController.edit');
-    Route.get('/','TopicController.gestion');
+    Route.get('/topic/create','ThemeController.all').middleware['auth'];
+    Route.get('/topic/:id/edit','TopicController.edit').middleware['auth'];
+    Route.get('/','TopicController.gestion').middleware['auth'];
     Route.on('topics').render('layouts.gestion');
 
-    Route.post('/topic/create','TopicController.create').validator('TopicCreate');
-    Route.put('/topic/:id/edit','TopicController.update').validator('TopicCreate');
-    Route.delete('/topic/:id/image/delete','TopicController.deleteImage');
-    Route.delete('topic/:id/delete','TopicController.delete');
+    Route.post('/topic/create','TopicController.create').validator('TopicCreate').middleware['auth'];
+    Route.put('/topic/:id/edit','TopicController.update').validator('TopicCreate').middleware['auth'];
+    Route.delete('/topic/:id/image/delete','TopicController.deleteImage').middleware['auth'];
+    Route.delete('topic/:id/delete','TopicController.delete').middleware['auth'];
 
 }).prefix('gestion');

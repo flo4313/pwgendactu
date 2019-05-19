@@ -3,6 +3,8 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
+const customException = use('App/Exceptions/CustomException')
+
 class Auth {
   /**
    * @param {object} ctx

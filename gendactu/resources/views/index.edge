@@ -20,7 +20,7 @@
             {{ csrfField() }}
             <div id="identifiant">
                 <label for="userId">Identifiant:</label>
-                <input class="input-sm" type="text"  name="userId" id="userId" value="{{old('userId','')}}" />
+                <input autocomplete="false" class="input-sm" type="text"  name="userId" id="userId" value="{{old('userId','')}}" />
                 @if(hasErrorFor('userId'))
                 <span>
                     {{getErrorFor('userId')}}
@@ -29,7 +29,7 @@
             </div>
             <div id="password">
                 <label for="pwd">Mot de passe:</label>
-                <input type="password" class="input-sm" name="pwd" id="pwd" />
+                <input autocomplete="false" type="password" class="input-sm" name="pwd" id="pwd" />
                 @if(hasErrorFor('pwd'))
                 <span>
                     {{getErrorFor('pwd')}}
