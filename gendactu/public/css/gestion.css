@@ -38,9 +38,7 @@ footer>div>a{
     color: white;
 }
 
-#linkCreate>a:hover {
-    color: #0000FF;
-}
+
 
 #linkCreate{
     padding: 5px;
@@ -52,14 +50,7 @@ footer>div>a{
     font-weight: 600;
   }
   
-  #linkCreate:hover{
-    padding: 5px;
-    background: white;
-    color:  #0000FF;
-    outline: none;
-    border: 1px solid #0000FFCC;
-    border-radius: 5px;
-  }
+  
 
   #linkCreate>a>i{
     padding: 0;
@@ -89,7 +80,7 @@ footer>div>a{
 }
 
 .topic>div{
-    width: 50%;
+    width: 33%;
 }
 
 .edit{
@@ -107,12 +98,8 @@ a:hover{
 }
 
 .edit:hover{
-    padding: 10px;
-    background: white;
-    color:  #00FF00;
+    color:  white;
     outline: none;
-    border: 1px solid #00FF00CC;
-    border-radius: 5px;
 }
 
 .edit>i{
@@ -132,12 +119,8 @@ a:hover{
 }
 
 .remove:hover{
-    padding: 10px;
-    background: white;
-    color:  #FF0000;
+    color:  white;
     outline: none;
-    border: 1px solid #FF0000CC;
-    border-radius: 5px;
 }
 
 .remove>i{
@@ -151,4 +134,10 @@ a:hover{
     align-items: center;
     flex-direction: row;
 
+}
+
+.linkT{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

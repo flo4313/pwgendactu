@@ -10,7 +10,7 @@ var gendarmerieJSON;
             function  displayTopics(topics){
                 document.getElementById('topicsliste').innerHTML="";
                 for(let topic of topics){
-                    document.getElementById('topicsliste').innerHTML+='<div class="topic" id="'+topic.topicId+'"><div class="infoT"><p>Topic: '+topic.title+'</p><div class="linkT"><a class="edit" href="/gestion/topic/'+topic.topicId+'/edit">Editer <i class="fa fa-edit"></i></a></div></div><button  onclick="deleteTopic('+topic.topicId+')" class="remove">Supprimer <i class="fa fa-remove"></i></button></div>'
+                    document.getElementById('topicsliste').innerHTML+='<div class="topic" id="'+topic.topicId+'"><div class="infoT"><p>Topic: '+topic.title+'</p></div><div class="linkT"><a class="edit" href="/gestion/topic/'+topic.topicId+'/edit">Editer <i class="fa fa-edit"></i></a><button  onclick="deleteTopic('+topic.topicId+')" class="remove">Supprimer <i class="fa fa-remove"></i></button></div></div>'
                 }
             }
 

@@ -29,10 +29,10 @@ Route.get('/themes','ThemeController.alltheme');
 Route.get('/departments','DepartmentController.allDepartment');
 
 Route.group(() =>{
-    Route.get('nbPages/department/:id','TopicController.getNbPagesDepartment').middleware['auth'];
-    Route.get('nbPages/theme/:theme/department/:department','TopicController.getNbPagesTheme').middleware['auth'];
+    Route.get('/nbPages/department/:id','TopicController.getNbPagesDepartment').middleware['auth'];
+    Route.get('/nbPages/theme/:theme/department/:department','TopicController.getNbPagesTheme').middleware['auth'];
     Route.get('/department/:department/page/:page','TopicController.byDep').middleware['auth'];
-    Route.get('department/:department/theme/:theme/page/:page','TopicController.byDepTheme').middleware['auth'];
+    Route.get('/department/:department/theme/:theme/page/:page','TopicController.byDepTheme').middleware['auth'];
 }).prefix('topics');
 
 Route.group(()=>{
@@ -41,7 +41,7 @@ Route.group(()=>{
     Route.get('/','TopicController.gestion').middleware['auth'];
     Route.on('topics').render('layouts.gestion');
 
-    Route.post('/topic/create','TopicController.create').validator('TopicCreate').middleware['auth'];
+    Route.post('/topic/creation','TopicController.create').validator('TopicCreate').middleware['auth'];
     Route.put('/topic/:id/edit','TopicController.update').validator('TopicCreate').middleware['auth'];
     Route.delete('/topic/:id/image/delete','TopicController.deleteImage').middleware['auth'];
     Route.delete('topic/:id/delete','TopicController.delete').middleware['auth'];

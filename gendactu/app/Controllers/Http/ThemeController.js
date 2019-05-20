@@ -20,7 +20,7 @@ class ThemeController {
         throw new customException('Accès interdit',401,'Unauthorized')
     }
 
-    async alltheme({response,session,params,view}){
+    async alltheme({response,request}){
         const themes = await Theme.all();
         if(request.ajax()){ 
             return response.json({

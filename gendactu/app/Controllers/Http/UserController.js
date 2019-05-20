@@ -41,7 +41,6 @@ class UserController {
             if(user!=null){
                 var pc = user.postalCode.toString();
                 var dep = parseInt(pc.slice(0,2));
-                console.log(dep);
                 return response.json({
                     dep:dep
                 })

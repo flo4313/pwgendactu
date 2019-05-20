@@ -43,7 +43,7 @@
             @if(flashMessage('loginError'))
                 <span>{{ flashMessage('loginError') }}</span>
             @endif
-        <form method="POST" action="/gestion/topic/{{topic.topicId}}/edit/?_method=PUT" id="topicCreate" enctype="multipart/form-data">
+        <form method="POST" autocomplete="off" action="/gestion/topic/{{topic.topicId}}/edit/?_method=PUT" id="topicCreate" enctype="multipart/form-data">
             {{ csrfField() }}
             <div id="title">
                 <label for="title">Titre:</label>
@@ -90,17 +90,17 @@
             </form>
         </div>
         </div>
-        <div id="right">
             @if(topic.image)
-                <button id="delete" onclick="deleteImg()">Supprimer</button>
+            <div id="right">
+                    <button id="delete" onclick="deleteImg()">Supprimer</button>
                 <img id="imageAff" src="{{topic.image}}" alt="Image actuel de l'actualité">
             @endif
             @if(hasErrorFor('image'))
                 <span>
                     {{getErrorFor('image')}}
                 </span>
+            </div>
             @endif
-        </div>
     </div>
         
     </div>
@@ -118,7 +118,7 @@
                 resultat = value.valeur;
                 alert("Image supprimée!");
                 if(resultat=="remove"){
-                    var elem = document.getElementById('image');
+                    var elem = document.getElementById('right');
                     elem.parentNode.removeChild(elem);
                 }
             }

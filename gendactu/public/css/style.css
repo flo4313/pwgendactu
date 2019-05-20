@@ -133,12 +133,8 @@ header{
 }
 
 .bt_sbt:hover{
-  padding: 5px;
-  background: white;
-  color:  #0000FF;
+  color:  white;
   outline: none;
-  border: 1px solid #0000FFCC;
-  border-radius: 5px;
 }
 
 .headermenu{

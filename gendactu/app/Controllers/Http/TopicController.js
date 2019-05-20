@@ -31,7 +31,6 @@ class TopicController {
                     types: ['image'],
                     size: '2mb'
                 })
-                
                 if (file !=null){
                     const fileName = topic.topicId +"."+file.subtype;
                     topic.image = "/images/topics/" + fileName;
@@ -210,8 +209,9 @@ class TopicController {
         throw new customException('Accès interdit',401,'Unauthorized')
     }
 
+
     //Recuperer les topics d'un departement et d'un theme
-    async byDepTheme({params,auth,response}){
+    async byDepTheme({request,params,auth,response}){
         const user = await auth.getUser();
         if(request.ajax()){
             if (user != null){
@@ -220,7 +220,7 @@ class TopicController {
                 var theme = params.theme;
                 var page = params.page - 1;
                 const nbP =  await Database.raw('Select count(*) as nbTopics From topics t, gendarmeries g Where t.author = g.gendarmerieId and g.department = '+dept +' and t.theme ='+theme);
-                var nbT = nbP[0][0].nbTopics ;
+                var nbT = nbP[0][0].nbTopics;
                 page = page * 5;
                 var nbTA = nbT - page;
                 if(nbTA > 5){
@@ -233,12 +233,11 @@ class TopicController {
                 return response.json({    
                     topics : topics[0],
                     res : res
-                }
-                )
+                })
             }
             throw new customException('Accès interdit',401,'Unauthorized')
         }
-        throw new customException('Accès interdit',401,'Unauthorized')        
+        throw new customException('Accès interdit',401,'Unauthorized')
     }
 
     //Update
@@ -285,9 +284,11 @@ class TopicController {
                             session.flash({message:"Actualité modifiée"});
                             response.redirect('back');
                             topic.save();
+                            return;
                         } catch (error) {
                             session.flash({message:"Echec de la modification"});
                             response.redirect('back');
+                            return;
                         }
                     }
                 }

@@ -41,7 +41,7 @@
         @if(flashMessage('loginError'))
             <span>{{ flashMessage('loginError') }}</span>
         @endif
-    <form method="POST" action="{{ route('TopicController.create') }}" id="topicCreate" enctype="multipart/form-data">
+    <form method="POST" action="/gestion/topic/creation" autocomplete="off" id="topicCreate" enctype="multipart/form-data">
         {{ csrfField() }}
         <div id="title">
             <label for="title">Titre:</label>

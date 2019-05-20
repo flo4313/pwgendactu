@@ -190,7 +190,9 @@ var themes;
             if (xhr.status === 200) {
                 let value = JSON.parse(xhr.responseText);
                 department = value.dep;
-                return department;
+                getThemes()
+                getDepartment()
+                getTopics()
             }
             else {
                 alert('Echec lors du chargement des données ' + xhr.status);
@@ -266,9 +268,15 @@ var themes;
     }   
 
     function recherche(){
+        page = 1;
         var th = document.getElementById('themes').value;
         var dpt = document.getElementById('departmentS').value;
         getTopics(dpt,th);
+        console.log(dpt,theme);
+    }
+
+    function init(){
+        getUserDepartment()
     }
 
     $(document).ready(function() {

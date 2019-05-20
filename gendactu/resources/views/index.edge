@@ -16,7 +16,7 @@
             @if(flashMessage('loginError'))
                 <span>{{ flashMessage('loginError') }}</span>
             @endif
-        <form method="POST" action="{{ route('UserController.login') }}" id="formCo">
+        <form method="POST" action="{{ route('UserController.login') }}" id="formCo" autocomplete="off">
             {{ csrfField() }}
             <div id="identifiant">
                 <label for="userId">Identifiant:</label>
