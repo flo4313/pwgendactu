@@ -9,6 +9,8 @@ class DirigerSchema extends Schema {
       table.increments()
       table.string('chef').references('nigend').inTable('users').notNullable().unique()
       table.integer('gendarmerie').references('gendarmerieId').inTable('gendarmeries').notNullable().unique()
+      table.date('dateDebut').notNullable();
+      table.date('dateFin');
       table.timestamps()
     })
   }

@@ -136,22 +136,28 @@ var themes;
                     document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item disabled"><a class="page-link"  tabindex="-1">Previous</a></li><li class="page-item active"><a class="page-link" >1</a></li><li class="page-item"><a class="page-link" onclick="suiv()">2</a></li><li class="page-item"><a class="page-link" onclick="suiv2()">3</a></li><li class="page-item"><a class="page-link" onclick="suiv()">Next</a></li></ul></nav>';
                 }
                 else if(page == 2){
-                    document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item "><a class="page-link" onclick="prev()" tabindex="-1">Previous</a></li><li class="page-item "><a class="page-link" onclick="prev()">1</a></li><li class="page-item active"><a class="page-link " >2</a></li><li class="page-item"><a class="page-link" onclick="suiv()">3</a></li><li class="page-item"><a class="page-link" onclick="suiv()">Next</a></li></ul></nav>';
+                    document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item "><a class="page-link" onclick="prev()" tabindex="-1">Previous</a></li><li class="page-item "><a class="page-link" onclick="prev()">1</a></li><li class="page-item active"><a class="page-link " >2</a></li><li class="page-item "><a class="page-link" onclick="suiv()">3</a></li><li class="page-item"><a class="page-link" onclick="suiv()">Next</a></li></ul></nav>';
+                }
+                else if(page == 3){
+                    document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item "><a class="page-link" onclick="prev()" tabindex="-1">Previous</a></li><li class="page-item "><a class="page-link" onclick="prev()">1</a></li><li class="page-item "><a class="page-link " >2</a></li><li class="page-item active"><a class="page-link" onclick="suiv()">3</a></li><li class="page-item"><a class="page-link" onclick="suiv()">Next</a></li></ul></nav>';
                 }
                 else{
                     var limit = page + 1;
                     if ( limit < nbpages){
+                        console.log("couco1")
                         pm1 = page - 1 ;
                         pp1 = page + 1  ;
-                        document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item "><a class="page-link" onclick="prev()" tabindex="-1">Previous</a></li><li class="page-item "><a class="page-link" onclick="prev()">'+pm1+'</a></li><li class="page-item active"><a class="page-link ">'+page+'</a></li><li class="page-item"><a class="page-link" onclick="suiv()">'+pp1+'/a></li><li class="page-item"><a class="page-link" onclick="suiv()">Next</a></li></ul></nav>';
+                        document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item "><a class="page-link" onclick="prev()" tabindex="-1">Previous</a></li><li class="page-item "><a class="page-link" onclick="prev()">'+pm1+'</a></li><li class="page-item active"><a class="page-link ">'+page+'</a></li><li class="page-item "><a class="page-link" onclick="suiv()">'+pp1+'/a></li><li class="page-item"><a class="page-link" onclick="suiv()">Next</a></li></ul></nav>';
                     }
                     else if ( limit === nbpages){
+                        console.log("couco")
                         pm1 = page - 1 ;
                         pm2 = page - 2  ;
-                        document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item "><a class="page-link" onclick="prev()" tabindex="-1">Previous</a></li><li class="page-item "><a class="page-link" onclick="suiv()">'+pm2+'</a></li><li class="page-item "><a class="page-link " onclick="prev()">'+pm1+'</a></li><li class="page-item active"><a class="page-link" >'+page+'/a></li><li class="page-item"><a class="page-link disabled" >Next</a></li></ul></nav>';
+                        document.getElementById('pagination').innerHTML='<nav aria-label="Pagination"><ul class="pagination justify-content-center"><li class="page-item "><a class="page-link" onclick="prev()" tabindex="-1">Previous</a></li><li class="page-item "><a class="page-link" onclick="suiv()">'+pm2+'</a></li><li class="page-item "><a class="page-link " onclick="prev()">'+pm1+'</a></li><li class="page-item "><a class="page-link" >'+page+'/a></li><li class="page-item active"><a class="page-link disabled" >Next</a></li></ul></nav>';
                     }
                     else{
-                        page = 1;
+                        console.log("couco")
+                            page = 1;
                         displayPagination();
                     }
                 }

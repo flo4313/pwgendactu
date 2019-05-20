@@ -14,21 +14,21 @@
     <h3 id="welcome">Détails de l'actualité</h3>
   </div>
   <div class="headermenu">
-      <div id="mleft">
-          <a href="/actu"><i class="fa fa-home" aria-hidden="true"></i> Accueil </a>
-        </div>
-        <div id="mright">
-            @if(admin == true)
-              <div id="gestion">
-                  <div >
-                    <a href="/gestion/topics" ><i class="fa fa-cog" aria-hidden="true"> </i> Gestion </a>
-                  </div>
-              </div>
-              @endif    
-              <div id="logout">
-                  <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"> </i> Deconnexion </a>
-              </div>
-            </div> 
+    <div id="mleft">
+      <a href="/actu" class="menu" title="Accueil"><i class="fa fa-home" aria-hidden="true"></i><div class="menupc"> Accueil </div></a>
+    </div>
+    <div id="mright">
+    @if(admin == true)
+      <div id="gestion">
+          <div >
+            <a href="/gestion/topics" class="menu" title="Gestion"><i class="fa fa-cog" aria-hidden="true"> </i><div class="menupc"> Gestion </div></a>
+          </div>
+      </div>
+      @endif    
+      <div id="logout">
+          <a href="/logout" class="menu" title="Deconnexion"><i class="fa fa-sign-out" aria-hidden="true"> </i><div class="menupc"> Deconnexion </div></a>
+      </div>
+    </div>
   </div>
 @endsection
 
@@ -48,7 +48,7 @@
         </div>
         <div>
           <h5> Description: </h5>
-          <p>{{topic.description}}</p>
+          <p id="desc">{{topic.description}}</p>
         </div>
       </div>
 

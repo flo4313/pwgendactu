@@ -36,8 +36,6 @@ textarea{
 
 #editForm{
     background-color: #BDB3CB33;
-    width: 80%;
-    margin-left: 10%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -48,8 +46,6 @@ textarea{
 
 .createForm{
     background-color: #BDB3CB33;
-    width: 60%;
-    margin-left: 20%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -76,6 +72,13 @@ textarea{
 #right{
     display: flex;
     flex-direction: column;
+    padding: 0 5px;
+    text-align: center;
+}
+
+#delete{
+    margin-left: 25%;
+    width:50%;
 }
 
 #imageAff{
@@ -85,10 +88,7 @@ textarea{
     max-width: 80%;
 }
 
-#delete{
-    margin-left: 30%;
-    width: 40%;
-}
+
 
 button{
     height: 100%;
@@ -104,4 +104,20 @@ button{
 button:hover{
     color:  white;
     outline: none;
+}
+
+@media screen and (max-width: 640px){
+    #container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #container>div {
+        width: 100%;
+    }
+
+    footer{
+        position: relative;
+        bottom: 0px;
+    }
 }

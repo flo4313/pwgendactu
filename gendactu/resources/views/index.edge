@@ -16,10 +16,10 @@
             @if(flashMessage('loginError'))
                 <span>{{ flashMessage('loginError') }}</span>
             @endif
-        <form method="POST" action="{{ route('UserController.login') }}" id="formCo" autocomplete="off">
+        <form method="POST" action="{{ route('UserController.login') }}" id="formCo" autocomplete="off" >
             {{ csrfField() }}
             <div id="identifiant">
-                <label for="userId">Identifiant:</label>
+                <label for="userId">Email ou nigend:</label>
                 <input autocomplete="false" class="input-sm" type="text"  name="userId" id="userId" value="{{old('userId','')}}" />
                 @if(hasErrorFor('userId'))
                 <span>

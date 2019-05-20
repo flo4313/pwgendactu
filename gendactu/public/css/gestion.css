@@ -133,11 +133,21 @@ a:hover{
     justify-content: space-around;
     align-items: center;
     flex-direction: row;
-
+    word-break: word-break;
 }
 
 .linkT{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+}
+
+@media screen and (max-width: 640px){
+    .topic{
+        flex-direction: column;
+    }
+
+    .topic>div{
+        width: 100%;
+    }
 }
